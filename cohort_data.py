@@ -114,9 +114,43 @@ def all_names_by_house(filename):
     ghosts = []
     instructors = []
 
+    rosters = [dumbledores_army, gryffindor, hufflepuff, ravenclaw, slytherin, ghosts, instructors]
     # TODO: replace this with your code
+    file = open(filename)
 
-    return []
+    for line in file:
+      sentence = line.strip().split("|")
+      first = sentence[0]
+      last = sentence[1]
+      full_name = first + " " + last
+      
+      if sentence[2] == "Dumbledore's Army":
+        dumbledores_army.append(full_name)
+      elif sentence[2] == "Gryffindor":
+        gryffindor.append(full_name)
+      elif sentence[2] == "Hufflepuff":
+        hufflepuff.append(full_name)
+      elif sentence[2] == "Ravenclaw":
+        ravenclaw.append(full_name)
+      elif sentence[2] == "Slytherin":
+        slytherin.append(full_name)
+      elif sentence[4] == "G":
+        ghosts.append(full_name)
+      elif sentence[4] == "I":
+        instructors.append(full_name)
+
+    #for i in range(len(rosters)-1):
+      #rosters[i].sort()
+
+    dumbledores_army.sort()
+    gryffindor.sort()
+    hufflepuff.sort()
+    ravenclaw.sort()
+    slytherin.sort()
+    ghosts.sort()
+    instructors.sort()
+    
+    return rosters
 
 
 def all_data(filename):
@@ -139,8 +173,18 @@ def all_data(filename):
     """
 
     all_data = []
-
+    
     # TODO: replace this with your code
+    file = open(filename)
+
+    for line in file:
+      sentence = line.strip().split("|")
+      first = sentence[0]
+      last = sentence[1]
+      sentence[:2] = [first + " " + last]
+     
+      all_data.append(tuple(sentence))
+
 
     return all_data
 
@@ -168,6 +212,24 @@ def get_cohort_for(filename, name):
 
     # TODO: replace this with your code
 
+    #all_data = []
+    
+    file = open(filename)
+
+    for line in file:
+      sentence = line.strip().split("|")
+      first = sentence[0]
+      last = sentence[1]
+      sentence[:2] = [first + " " + last]
+
+      #all_data.append(sentence)
+
+      if name in sentence:
+        return sentence[3]
+      else:
+        continue
+  
+    return None
 
 def find_duped_last_names(filename):
     """Return a set of duplicated last names that exist in the data.
