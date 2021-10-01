@@ -20,7 +20,7 @@ def all_houses(filename):
 
     # TODO: replace this with your code
     for line in file:
-      sentence = line.lstrip().split("|")
+      sentence = line.strip().split("|")
       house = sentence[2]
       if house != '':
         houses.add(house)
@@ -58,7 +58,21 @@ def students_by_cohort(filename, cohort="All"):
 
     students = []
 
-    return
+    # TODO: replace this with your code
+    file = open(filename)
+
+    for line in file:
+      sentence = line.strip().split("|")
+      first = sentence[0]
+      last = sentence[1]
+      full_name = first + " " + last
+
+      if sentence[4] == cohort:
+        students.append(full_name)
+      elif cohort == "All" and sentence[4] != "I" and sentence[4] != "G":
+        students.append(full_name)
+
+    return sorted(students)
 
 
 def all_names_by_house(filename):
